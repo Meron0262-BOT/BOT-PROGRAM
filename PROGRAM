@@ -1,25 +1,8 @@
-from flask import Flask
 from threading import Thread
 import discord
 from discord.ext import commands
 from datetime import datetime, timedelta
 from googletrans import Translator
-
-# Flask部分（Replit用）
-app = Flask('')
-
-@app.route('/')
-def home():
-    return "I'm alive!"
-
-def run():
-    app.run(host='0.0.0.0', port=8080)
-
-def keep_alive():
-    t = Thread(target=run)
-    t.start()
-
-keep_alive()
 
 # Bot設定
 intents = discord.Intents.default()
@@ -154,7 +137,7 @@ async def timeout_command(ctx, member: discord.Member, duration: str, *, reason:
 @bot.tree.command(name="mention", description="指定したユーザーにメンションします（上限30回）")
 async def mentionbomb(interaction: discord.Interaction, member: discord.Member, message: str, count: int):
     
-    # サーバーオーナーかどうかチェック
+    # サーバーオーナーかどうかチェック@bot.slash_command
     if interaction.user.id != interaction.guild.owner_id:
         await interaction.response.send_message("😭　このコマンドはサーバーオーナーしか使えません！", ephemeral=False)
         return
@@ -184,7 +167,7 @@ async def translate(interaction: discord.Interaction, text: str, target_lang: st
     except Exception as e:
         print(e)
         await interaction.response.send_message("😭　翻訳に失敗しました！")
-
+        
 # -----------------------------
 # テキストコマンドのエラー処理
 @bot.event
