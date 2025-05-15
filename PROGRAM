@@ -3,6 +3,11 @@ import discord
 from discord.ext import commands
 from datetime import datetime, timedelta
 from googletrans import Translator
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+TOKEN = os.getenv("Key")
 
 # Bot設定
 intents = discord.Intents.default()
@@ -182,4 +187,4 @@ async def on_command_error(ctx, error):
 
 # -----------------------------
 # 起動（トークンは環境変数などで安全に管理してね）
-bot.run("MTM2ODkwNjMyOTExNjExNDk3NA.GvwU21.XO_azOMftwkjjrLpHT_Rn6zF_tMLPQ8MGS8WAU")
+bot.run("TOKEN")
